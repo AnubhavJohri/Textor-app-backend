@@ -14,7 +14,7 @@ const url = "mongodb://localhost:27017/TextorDB";
 //2.)mLab MONGODB URL
 //ONLINE ONLY
 //FOR DEPLOYEMENT AND CLOUD USE
-const MONGOLAB_URI= "mongodb://heroku_nnd05p0f:d6ssocg9fjk6ea6dtaka13afom@ds243717.mlab.com:43717/heroku_nnd05p0f";
+const MONGOLAB_URI= "mongodb://heroku_gnld3pfw:j3ua0r70ihr805ov8ma7do4fkj@ds261077.mlab.com:61077/heroku_gnld3pfw";
 //------------------------------------------------------------------------------------------------------------------
 
 
@@ -34,7 +34,7 @@ const userSchema = Schema({
 //1.)GETS USER OBJECT FROM USER DATABASE
 let collection = {};
 collection.getUserCollection = () =>{
-    return Mongoose.connect( url , { useNewUrlParser: true })
+    return Mongoose.connect( MONGOLAB_URI , { useNewUrlParser: true })
     .then(database =>{
         return database.model('User' , userSchema )
     }).catch(() => {

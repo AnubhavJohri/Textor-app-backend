@@ -4,7 +4,6 @@ let TextorModel = {} ;
 
 
 TextorModel.insertEntry = ( email , imageOb ) => {
-
     return collection.getUserCollection().then( db => {
         return db.find( { userId : email }).then( findResult => {
             //CONDITION 1 :- FINDS IF EMAIL ENTERED IS PRESENT OR  NOT
