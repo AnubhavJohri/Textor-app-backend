@@ -17,7 +17,7 @@ TextorModel.insertEntry = ( email , imageOb ) => {
                      {
                         if( insertResult.length > 0 )
                         {   //INSERT IMAGE OBJECT IN THAT DOCUMENT
-                            return db.update( { userId : email } , { $push : { userImages : imageOb } } ).then( updateResult => 
+                            return db.updateOne( { userId : email } , { $push : { userImages : imageOb } } ).then( updateResult => 
                                 {
                                     if ( updateResult.nModified > 0 )
                                     return imageOb.extractedText ;
@@ -32,7 +32,7 @@ TextorModel.insertEntry = ( email , imageOb ) => {
                 //IF EMAIL ID ALREADY EXISTS SIMPLY PUSH IMAGE OBJECT IN DB
                 else
                 {
-                    return db.update( { userId : email } , { $push : { userImages : imageOb } } ).then( updateResult => 
+                    return db.updateOne( { userId : email } , { $push : { userImages : imageOb } } ).then( updateResult => 
                     {
                         if ( updateResult.nModified > 0 )
                         return imageOb.extractedText ;

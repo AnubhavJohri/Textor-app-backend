@@ -5,8 +5,7 @@ const app = express();
 // const errorLogger = require("./utilities/errorLogger");
 // const requestLogger = require("./utilities/requestLogger");
 const cors = require('cors') ;
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 3001;
 
 
 app.use(cors()); 

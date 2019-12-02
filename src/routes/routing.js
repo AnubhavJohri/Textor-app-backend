@@ -3,24 +3,25 @@ const router = express.Router();
 const vision = require('@google-cloud/vision');
 const base64ToImage = require('base64-to-image');
 const TextorService = require('../service/textor') ;
+const fs = require('fs') ;
 
 
 router.post("/extractImage/:emailId" , (req , res,  next) => {
-    const email = req.params.emailId ;
-    const base64_st = req.body.image ;
+    var email = req.params.emailId ;
+    var base64_st = req.body.image ;
     email = email.toLowerCase();
     console.log("base64 string=",base64_st.substring(0,15));
     var imageInfo = base64ToImage(base64_st,"./"); 
-    const img =  imageInfo.fileName ;
+    var img =  imageInfo.fileName ;
     var imageOb = {} ;
     const client = new vision.ImageAnnotatorClient({
         keyFilename: './serviceaccountkey.json'
       });
       client.textDetection(img).then(response => {
-          const extractedText = response[0].fullTextAnnotation.text ;
+          const extractedText = response[0].fullTextAnnotation ? response[0].fullTextAnnotation.text : null ; 
           console.log("text got=", extractedText);
-
-          if( extractedText.length==0 )
+          fs.unlink(img);
+          if( !extractedText )
           res.json( { "message" : " Image had no string " } ) ;
           else{
               imageOb["postTime"] = new Date().toLocaleString() ;
