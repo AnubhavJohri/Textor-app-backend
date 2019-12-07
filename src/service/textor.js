@@ -14,5 +14,16 @@ TextorService.insertEntry = ( email , imageOb ) => {
 
 }
 
-
+TextorService.extractHistory = ( email ) => {
+    return TextorModel.extractHistory( email ).then( result => {
+        let e = new Error() ;
+        if( result )
+        return result ;
+        else{
+            e.message = "Either the Email-id isn't regisered or their's no image with text to display" ;
+            e.status = 402 ;
+            throw e ;
+        }
+    } )
+}
 module.exports = TextorService ;

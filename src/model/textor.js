@@ -48,4 +48,17 @@ TextorModel.insertEntry = ( email , imageOb ) => {
 }
 
 
+TextorModel.extractHistory = ( email ) => {
+    return collection.getUserCollection().then( db => {
+        return db.find({ userId : email }).then( findResult => {
+            console.log("result=",findResult,email);
+            
+            if ( findResult[0] )
+            return findResult[0].userImages ;
+            else
+            return null ;
+        } )
+    })
+}
+
 module.exports = TextorModel ;

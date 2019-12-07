@@ -38,7 +38,16 @@ router.post("/extractImage/:emailId" , (req , res,  next) => {
             } )
 
           }
-        }).catch(err => next(err))
+        }).catch(err => {console.log("error occured=",err);
+         next(err)})
 })
+
+
+router.get( "/extractHistory/:emailId" , ( req , res , next ) => {
+  const userId = req.params.emailId ;
+  return TextorService.extractHistory( userId )
+  .then( result => res.json({"message" : result})).catch(err=>{console.log(err.message);
+   next(err)});
+} )
 
 module.exports = router ;
